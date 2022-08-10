@@ -42,7 +42,7 @@ export default function App() {
 
   return (
     <View onLayout={onLayoutRootView}>
-
+      <Text>Olá</Text>
     </View>
   );
 }
