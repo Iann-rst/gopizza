@@ -1,20 +1,31 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
+
+type User = {
+  id: string;
+  name: string;
+  isAdmin: boolean;
+}
 
 type AuthContextData = {
   signIn: (email: string, password: string) => Promise<void>;
   isLogging: boolean;
+  user: User | null;
 }
 
 type AuthProviderProps = {
   children: ReactNode;
 }
 
+
 export const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
   const [isLogging, setIsLogging] = useState(false);
+  const [user, setUser] = useState<User | null>(null)
 
   async function signIn(email: string, password: string) {
     if (!email || !password) {
@@ -24,7 +35,21 @@ function AuthProvider({ children }: AuthProviderProps) {
     setIsLogging(true);
 
     auth().signInWithEmailAndPassword(email, password).then(account => {
-      console.log(account);
+      firestore().collection('users').doc(account.user.uid).get().then(profile => {
+        const { name, isAdmin } = profile.data() as User;
+
+
+        if (profile.exists) {
+          const userData = {
+            id: account.user.uid,
+            name,
+            isAdmin
+          };
+
+          setUser(userData);
+
+        }
+      }).catch(() => Alert.alert('Login', 'Não foi possível buscar os dados de perfil do usuário.'));
     }).catch(error => {
       const { code } = error;
 
@@ -36,7 +61,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     }).finally(() => setIsLogging(false))
   }
   return (
-    <AuthContext.Provider value={{ signIn, isLogging }}>
+    <AuthContext.Provider value={{ signIn, isLogging, user }}>
       {children}
     </AuthContext.Provider>
   )
