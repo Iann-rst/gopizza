@@ -3,7 +3,9 @@ import { Button } from '@components/Button';
 import React from 'react';
 import { Alert, KeyboardAvoidingView, Platform } from 'react-native';
 
-import { Container, Content, Title } from './styles'
+import { Container, Content, Title, Brand, ForgotPasswordButton, ForgotPasswordLabel } from './styles'
+
+import brandImg from '@assets/brand.png';
 
 
 export function SignIn() {
@@ -15,6 +17,8 @@ export function SignIn() {
     <Container>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <Content>
+
+          <Brand source={brandImg} />
 
           <Title>Login</Title>
 
@@ -33,6 +37,10 @@ export function SignIn() {
             autoCapitalize="none"
             secureTextEntry
           />
+
+          <ForgotPasswordButton>
+            <ForgotPasswordLabel>Esqueci minha senha</ForgotPasswordLabel>
+          </ForgotPasswordButton>
 
           <Button type='secondary' title="Entrar" onPress={handleSignIn} />
         </Content>
