@@ -8,4 +8,5 @@ export const Container = styled(LinearGradient).attrs(({ theme }) => ({
 }))`
   flex: 1;
   justify-content: center;
+  padding: 32px;
 `;
