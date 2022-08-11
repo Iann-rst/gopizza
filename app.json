@@ -3,6 +3,17 @@
     "name": "gopizza",
     "slug": "gopizza",
     "version": "1.0.0",
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "package": "com.iannrst.gopizza"
+    },
+    "ios": {
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "bundleIdentifier": "com.iannrst.gopizza"
+    },
+    "plugins": [
+      "@react-native-firebase/app"
+    ],
     "assetBundlePatterns": [
       "**/*"
     ]
