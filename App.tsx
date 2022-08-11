@@ -11,7 +11,11 @@ import theme from './src/theme';
 
 import { StatusBar } from 'expo-status-bar'
 
+import { AuthProvider } from '@hooks/auth';
+
 import { SignIn } from '@screens/SignIn'
+
+
 
 SplashScreen.preventAutoHideAsync();
 
@@ -50,7 +54,9 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <ThemeProvider theme={theme}>
         <StatusBar style="light" translucent backgroundColor="transparent" />
-        <SignIn />
+        <AuthProvider>
+          <SignIn />
+        </AuthProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
   );
