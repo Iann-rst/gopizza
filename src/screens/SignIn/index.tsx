@@ -1,18 +1,24 @@
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, KeyboardAvoidingView, Platform } from 'react-native';
 
 import { Container, Content, Title, Brand, ForgotPasswordButton, ForgotPasswordLabel } from './styles'
 
 import brandImg from '@assets/brand.png';
 
+import { useAuth } from '@hooks/auth'
+
 
 export function SignIn() {
-  function handleSignIn() {
-    Alert.alert('Entrar')
-  }
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
+  const { signIn, isLogging } = useAuth();
+
+  function handleSignIn() {
+    signIn(email, password);
+  }
   return (
     <Container>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -28,6 +34,7 @@ export function SignIn() {
             autoCorrect={false}
             autoCapitalize="none"
             keyboardType="email-address"
+            onChangeText={setEmail}
           />
 
           <Input
@@ -36,13 +43,14 @@ export function SignIn() {
             autoCorrect={false}
             autoCapitalize="none"
             secureTextEntry
+            onChangeText={setPassword}
           />
 
           <ForgotPasswordButton>
             <ForgotPasswordLabel>Esqueci minha senha</ForgotPasswordLabel>
           </ForgotPasswordButton>
 
-          <Button type='secondary' title="Entrar" onPress={handleSignIn} />
+          <Button type='secondary' title="Entrar" onPress={handleSignIn} isLoading={isLogging} />
         </Content>
       </KeyboardAvoidingView>
     </Container>
