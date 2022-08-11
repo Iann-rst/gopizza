@@ -15,7 +15,10 @@
         "./src/screens/*"
       ],
       "@assets/*": [
-        "./src/assets"
+        "./src/assets/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
       ]
     }
   }
