@@ -13,8 +13,7 @@ import { StatusBar } from 'expo-status-bar'
 
 import { AuthProvider } from '@hooks/auth';
 
-import { SignIn } from '@screens/SignIn'
-import { Home } from '@screens/Home';
+import { Routes } from './src/routes';
 
 
 
@@ -56,7 +55,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <StatusBar style="light" translucent backgroundColor="transparent" />
         <AuthProvider>
-          <Home />
+          <Routes />
         </AuthProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
