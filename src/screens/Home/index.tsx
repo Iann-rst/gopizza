@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import happyEmoji from '@assets/happy.png';
 import { BorderlessButton } from 'react-native-gesture-handler';
-import { TouchableOpacity, Alert } from 'react-native';
+import { TouchableOpacity, Alert, FlatList } from 'react-native';
 import { useTheme } from 'styled-components';
 
 import firestore from '@react-native-firebase/firestore';
@@ -23,9 +23,11 @@ import {
 } from './styles';
 
 export function Home() {
-
+  const [pizzas, setPizzas] = useState<ProductProps[]>([]);
+  const [search, setSearch] = useState('');
   const { COLORS } = useTheme();
 
+  //Função para buscar pizza no banco firestore
   function fetchPizzas(value: string) {
     const formattedValue = value.toLocaleLowerCase().trim();
 
@@ -37,8 +39,19 @@ export function Home() {
         }
       }) as ProductProps[];
 
-      console.log(data);
+      setPizzas(data);
     }).catch(() => Alert.alert('Consulta', 'Não foi possível realizar a consulta'))
+  }
+
+  //Função para buscar uma pizza x digitada
+  function handleSearch() {
+    fetchPizzas(search);
+  }
+
+  //Função para limpar a busca
+  function handleSearchClear() {
+    setSearch('');
+    fetchPizzas('');
   }
 
   useEffect(() => {
@@ -58,15 +71,33 @@ export function Home() {
         </TouchableOpacity>
       </Header>
 
-      <Search onSearch={() => { }} onClear={() => { }} />
+      <Search
+        onChangeText={setSearch}
+        value={search}
+        onSearch={handleSearch}
+        onClear={handleSearchClear}
+      />
 
       <MenuHeader>
         <Title>Cardápio</Title>
         <MenuItemsNumber>10 pizzas</MenuItemsNumber>
       </MenuHeader>
 
+      <FlatList
+        data={pizzas}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => <ProductCard
+          data={item} />}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={
+          {
+            paddingTop: 20,
+            paddingBottom: 125,
+            marginHorizontal: 24
+          }
+        }
+      />
 
-      <ProductCard data={{ id: '1', name: 'Pizza', description: 'Ingredientes', photo_url: 'https://github.com/Iann-rst.png' }} />
     </Container>
   )
 }
