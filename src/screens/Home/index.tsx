@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback, } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import happyEmoji from '@assets/happy.png';
 import { BorderlessButton } from 'react-native-gesture-handler';
@@ -6,7 +6,7 @@ import { TouchableOpacity, Alert, FlatList } from 'react-native';
 import { useTheme } from 'styled-components';
 
 import firestore from '@react-native-firebase/firestore';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 
 import { Search } from '@components/Search';
 import { ProductCard, ProductProps } from '@components/ProductCard';
@@ -65,9 +65,12 @@ export function Home() {
     navigation.navigate('product', {});
   }
 
-  useEffect(() => {
+
+
+  useFocusEffect(useCallback(() => {
     fetchPizzas('');
   }, [])
+  );
 
   return (
     <Container>
