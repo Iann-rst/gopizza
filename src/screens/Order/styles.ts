@@ -26,6 +26,7 @@ export const Photo = styled.Image`
   align-self: center;
   position: relative;
   top: -120px;
+  
 `;
 
 export const Sizes = styled.View`
