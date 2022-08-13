@@ -113,10 +113,14 @@ export function Product() {
       },
       photo_url,
       photo_path: reference.fullPath
-    }).then(() => Alert.alert('Cadastro', 'Pizza cadastrada com sucesso.')).catch(() => Alert.alert('Cadastro', 'Não foi possível cadastrar a pizza.'))
+    }).then(() => navigation.navigate('home'))
+      .catch(() => {
+        setIsLoading(false);
+        Alert.alert('Cadastro', 'Não foi possível cadastrar a pizza.')
+      })
 
 
-    setIsLoading(false);
+
   }
 
   function handleButtonBack() {
