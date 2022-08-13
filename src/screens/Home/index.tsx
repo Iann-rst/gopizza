@@ -6,7 +6,7 @@ import { TouchableOpacity, Alert, FlatList } from 'react-native';
 import { useTheme } from 'styled-components';
 
 import firestore from '@react-native-firebase/firestore';
-
+import { useNavigation } from '@react-navigation/native'
 
 import { Search } from '@components/Search';
 import { ProductCard, ProductProps } from '@components/ProductCard';
@@ -19,13 +19,16 @@ import {
   GreetingText,
   MenuHeader,
   MenuItemsNumber,
-  Title
+  Title,
+  NewProductionButton
 } from './styles';
 
 export function Home() {
   const [pizzas, setPizzas] = useState<ProductProps[]>([]);
   const [search, setSearch] = useState('');
+
   const { COLORS } = useTheme();
+  const navigation = useNavigation();
 
   //Função para buscar pizza no banco firestore
   function fetchPizzas(value: string) {
@@ -52,6 +55,14 @@ export function Home() {
   function handleSearchClear() {
     setSearch('');
     fetchPizzas('');
+  }
+
+  function handleOpen(id: string) {
+    navigation.navigate('product', { id });
+  }
+
+  function handleAdd() {
+    navigation.navigate('product', {});
   }
 
   useEffect(() => {
@@ -86,8 +97,12 @@ export function Home() {
       <FlatList
         data={pizzas}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => <ProductCard
-          data={item} />}
+        renderItem={({ item }) =>
+        (<ProductCard
+          data={item}
+          onPress={() => handleOpen(item.id)}
+        />
+        )}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={
           {
@@ -97,6 +112,8 @@ export function Home() {
           }
         }
       />
+
+      <NewProductionButton title="Cadastrar Pizza" type="secondary" onPress={handleAdd} />
 
     </Container>
   )
