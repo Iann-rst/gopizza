@@ -22,6 +22,10 @@
     ],
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "splash": {
+      "image": "./assets/Splash.png",
+      "backgroundColor": "#B83341"
+    }
   }
 }
