@@ -37,12 +37,20 @@ Aplicativo para auxiliar Garçons de uma Pizzaria.
 
 ## :camera: Screenshots
 
+#### Tela de Login
+
 <div align="center">
-  <img src=".github/Splash.jpg" alt="Tela Splash" height="500"/>
   <img src=".github/SignIn.jpg" alt="Tela de Login" height="500"/>
+</div>
+
+#### Telas do Administrador
+
+<div align="center">
   <img src=".github/Home-Admin.jpg" alt="Tela de Home para Admin" height="500"/>
   <img src=".github/Cadastrar_Pizza.jpg" alt="Tela de cadastro de uma pizza" height="500"/>
 </div>
+
+#### Telas de acesso do Garçom
 
 <div align="center">
   <img src=".github/Home-Garçom.jpg" alt="Tela de Login" height="500"/>
