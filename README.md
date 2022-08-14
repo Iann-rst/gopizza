@@ -32,6 +32,10 @@ Aplicativo para auxiliar Garçons de uma Pizzaria.
 
  - Styled-components;
 
+ - useContext;
+
+ - React Navigation (Stack Navigation e Tab Navigation);
+
  - Typescript;
 
 
