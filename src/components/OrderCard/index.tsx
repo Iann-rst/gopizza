@@ -3,23 +3,33 @@ import { TouchableOpacityProps } from 'react-native';
 
 import { Container, Image, Description, Name, StatusContainer, StatusLabel, StatusTypesProps } from './styles';
 
-type Props = TouchableOpacityProps & {
-  index: number;
+export type OrderProps = {
+  id: string;
+  pizza: string;
+  image: string;
+  status: StatusTypesProps;
+  table_number: string;
+  quantity: string;
 }
 
-export function OrderCard({ index, ...rest }: Props) {
+type Props = TouchableOpacityProps & {
+  index: number;
+  data: OrderProps;
+}
+
+export function OrderCard({ index, data, ...rest }: Props) {
   return (
     <Container index={index} {...rest}>
-      <Image source={{ uri: 'https://github.com/Iann-rst.png' }} />
+      <Image source={{ uri: data.image }} />
 
       <Name>4 Queijos</Name>
 
       <Description>
-        Mesa 5 ⚬ Qnt: 1
+        Mesa {data.table_number} ⚬ Qnt: {data.quantity}
       </Description>
 
-      <StatusContainer status="Preparando">
-        <StatusLabel status="Preparando">Preparando</StatusLabel>
+      <StatusContainer status={data.status}>
+        <StatusLabel status={data.status}>{data.status}</StatusLabel>
       </StatusContainer>
     </Container>
   )
