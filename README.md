@@ -8,7 +8,7 @@ Aplicativo para auxiliar Garçons de uma Pizzaria.
 
  - O Garçom anota o pedido do cliente e acompanha o processo de preparo da pizza;
 
- - Para salvar os usuários (admin e garçom), salvar o cardápio da pizza e os pedidos dos clientes foi utilizado o React Native Firebase. Utilizando Firebase Auth para realizar a autenticação dos usuários, Firebase Storage para salvar as imagens dos cardápios e Firebase Firestore para salvar o acesso do Admin e Garçom, além de salvar os pedidos. 
+ - Para salvar os usuários (admin e garçom), salvar o cardápio da pizza e os pedidos dos clientes foi utilizado o React Native Firebase. Utilizando Firebase Auth para realizar a autenticação dos usuários, Firebase Storage para salvar as imagens das pizzas e Firebase Firestore para salvar o acesso do Admin e Garçom, além de salvar os pedidos. 
 
 ## ⚒ Tecnologias
 
