@@ -39,6 +39,16 @@ Aplicativo para auxiliar Garçons de uma Pizzaria.
  - Typescript;
 
 
+## :rocket: Como Executar
+
+```bash
+    # Faça o clone do projeto
+    git clone https://github.com/Iann-rst/gopizza.git
+    # Instalação das dependências
+    npm install
+    
+    # Não esqueça de criar uma aplicação no Firebase Console e adicionar acesso ao app com Android e iOS
+```
 
 
 ## :camera: Screenshots
